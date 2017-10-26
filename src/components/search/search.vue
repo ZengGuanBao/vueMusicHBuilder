@@ -11,4 +11,8 @@ export default {
 </script>
 
 <style>
+.searchView{
+    width: 100%;
+    height: 100%;
+}
 </style>
