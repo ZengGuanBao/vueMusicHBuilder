@@ -1,6 +1,9 @@
 <template>
   <div class="searchView">
     <input type="" name="" id="" value="" />
+    <div>
+      <p>我问我</p>
+    </div>
   </div>
 </template>
 
