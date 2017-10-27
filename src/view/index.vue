@@ -2,6 +2,7 @@
   <div class="index">
   	<a @click="playSongs()">播放歌曲</a>
   	<router-link to="/mvList">mv列表</router-link>
+  	<router-view/>
   </div>
 </template>
 

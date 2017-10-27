@@ -1,13 +1,17 @@
 <template>
 	<div class="mvPlay">
-		
+	  <div class="mvheader">
+      <i class="fa fa-arrow-left fa-2x"  @click="mvbackClick"></i>
+      <span>{{mvname}}</span>
+    </div>
 		<video :src="videoSrc" controls="controls">
 			您的浏览器不支持 video 标签。
 		</video>
-		<h3>{{mvname}}</h3>
-		<span>{{desc}}</span>
-		<span>{{pubdate}}</span>
-		<span>{{(listennum/10000).toFixed(2)}}</span>
+		<div class="mvdetailed">
+      <span>{{desc}}</span>
+      <span>{{pubdate}}</span>
+      <span>{{(listennum/10000).toFixed(2)}}</span>
+		</div>
 	</div>
 </template>
 
@@ -70,9 +74,12 @@ export default {
 					console.log(_this.videoSrc)
 				},
 				error: function() {
-					alert('fail');
+					alert('fail')
 				}
 			});
+		},
+		mvbackClick: function () {
+			this.$router.back()
 		}
 	}
 }
@@ -85,10 +92,47 @@ export default {
 	top: 0;
 	left: 0;
 	z-index: 10;
+	width: 100%;
+	height: 100%;
 	overflow-y: scroll;
 	background-color: #fff;
 }
+.mvheader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: #31C27C
+}
+.mvheader i{
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  width: 10%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  z-index: 10;
+}
+.mvheader span{
+  display: inline-block;
+  margin-left: 10px;
+  width: 90%;
+  margin-left: -10%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
 video{
+  margin-top: 40px;
 	width: 100%;
+}
+.mvdetailed{
+  height: 400px;
+  overflow-y: scroll;
 }
 </style>
