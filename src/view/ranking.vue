@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .ranking{
 	overflow-y: scroll;
 	padding-bottom: 110px;
