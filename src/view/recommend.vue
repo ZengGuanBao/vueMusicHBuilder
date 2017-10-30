@@ -31,8 +31,8 @@ export default {
     this.$nextTick(function () {
       $('.recommend').css('height', $(window).height()-184)
       $(window).resize(function () {  
-		$('.recommend').css('height', $(window).height()-184)
-	  });
+        $('.recommend').css('height', $(window).height()-184)
+      });
       var _this = this
       getTopList().then((res) => {
         _this.topList = res.data.topList
