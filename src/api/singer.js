@@ -23,12 +23,12 @@ export function getSingerDetail (singerId) {
   const data = Object.assign({}, commonParams, {
     hostUin: 0,
     needNewCode: 0,
-    platform: 'yqq',
+    platform: 'h5page',
     order: 'listen',
     begin: 0,
     num: 80,
     songstatus: 1,
-    singermid: singerId
+    singerid: singerId
   })
   return jsonp(url, data, options)
 }

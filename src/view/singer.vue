@@ -2,10 +2,13 @@
   <div class="singer">
     <ul v-for="(singerItem,index) in singers">
         <li>
+          <router-link :to="{path: '/singer/singerDetail', query: {id: singerItem.Fsinger_id}}">
             <img class="singer_list__pic" v-bind:src="'https://y.gtimg.cn/music/photo_new/T001R150x150M000' + singerItem.Fsinger_mid + '.jpg?max_age=2592000'" alt="Fsinger_name">
             <span class="name">{{singerItem.Fsinger_name}}</span>
+          </router-link>
         </li>
     </ul>
+    <router-view/>
   </div>
 </template>
 
@@ -27,6 +30,7 @@ export default {
       var _this = this
       getSingerList().then((res) => {
         _this.singers = res.data.list
+        console.log(res.data.list)
       })
     })
   }

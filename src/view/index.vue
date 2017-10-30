@@ -40,7 +40,6 @@ export default {
           img: 'http://m.pc6.com/public/img/20151202.jpg'
         }
       ]
-
     }
   },
   components: {
@@ -48,6 +47,7 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
+      this.sliderData()
       $('.index').css('height', $(window).height()-84)
       $(window).resize(function () {  
 				$('.index').css('height', $(window).height()-84)
@@ -55,6 +55,24 @@ export default {
     })
   },
   methods: {
+    sliderData: function() {
+			var _this = this;
+			$.ajax({
+				type: "get",
+				async: false,
+				url: "https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&_=1509329368913",
+				dataType: "jsonp",
+				// jsonp: "callback",
+				// jsonpCallback: "",
+				//scriptCharset: 'GBK', //设置编码，否则会乱码
+				success: function(data) {
+					console.log(data)
+				},
+				error: function() {
+					alert('fail');
+				}
+			});
+		},
   	playSongs: function () {
   		document.getElementById("audioPlay").style.display = 'block'
   		document.getElementById("playAudio").play()

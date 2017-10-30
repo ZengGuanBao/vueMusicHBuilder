@@ -10,6 +10,7 @@ import allRanking from '@/components/ranking/allRanking'
 import musicList from '@/components/music-list/music-list'
 import mvList from '@/components/mv/mvList'
 import mvPlay from '@/components/mv/mvPlay'
+import singerDetail from '@/components/singer/singerDetail'
 
 Vue.use(Router)
 
@@ -58,7 +59,13 @@ export default new Router({
     {
       path: '/singer',
       name: 'singer',
-      component: singer
+      component: singer,
+      children: [{
+          path: '/singer/singerDetail',
+          name: 'singerDetail',
+          component: singerDetail
+        }
+      ]
     },
     {
       path: '/search',
