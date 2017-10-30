@@ -10,9 +10,9 @@ export default {
   name: 'search',
   mounted: function () {
     this.$nextTick(function () {
-      $('.index').css('height', $(window).height()-84)
+      $('.search').css('height', $(window).height()-184)
       $(window).resize(function () {  
-				$('.index').css('height', $(window).height()-84)
+				$('.search').css('height', $(window).height()-184)
 		  });
     })
   }
@@ -22,6 +22,5 @@ export default {
 <style>
 .singer {
 	overflow-y: scroll;
-	padding-bottom: 100px;
 }
 </style>

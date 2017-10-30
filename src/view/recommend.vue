@@ -29,9 +29,9 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-      $('.recommend').css('height', $(window).height()-84)
+      $('.recommend').css('height', $(window).height()-184)
       $(window).resize(function () {  
-		$('.recommend').css('height', $(window).height()-84)
+		$('.recommend').css('height', $(window).height()-184)
 	  });
       var _this = this
       getTopList().then((res) => {
@@ -50,7 +50,6 @@ export default {
   font-size: 14px;
   background: #3E3E3E;
   overflow-y: scroll;
-  padding-bottom: 100px;
 }
 .recommend>ul{
   padding-top: 10px;

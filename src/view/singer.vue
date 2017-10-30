@@ -23,9 +23,9 @@ export default {
   },
   mounted: function () {
     this.$nextTick(function () {
-    	$('.singer').css('height', $(window).height()-84)
+    	$('.singer').css('height', $(window).height()-184)
       $(window).resize(function () {  
-				$('.singer').css('height', $(window).height()-84)
+				$('.singer').css('height', $(window).height()-184)
 		  });
       var _this = this
       getSingerList().then((res) => {
@@ -39,7 +39,6 @@ export default {
 <style>
 	.singer {
 		overflow-y: scroll;
-		padding-bottom: 100px;
 	}
 	
 	.singer_list__pic {

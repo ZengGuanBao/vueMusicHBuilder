@@ -13,9 +13,9 @@ export default {
   name: 'ranking',
   mounted: function () {
     this.$nextTick(function () {
-      $('.ranking').css('height', $(window).height()-84)
+      $('.ranking').css('height', $(window).height()-184)
       $(window).resize(function () {  
-		$('.ranking').css('height', $(window).height()-84)
+		$('.ranking').css('height', $(window).height()-184)
 	  });
     })
   }
@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .ranking{
 	overflow-y: scroll;
-	padding-bottom: 110px;
+	padding-bottom: 10px;
 }
 .ranking p{
 	position: relative;

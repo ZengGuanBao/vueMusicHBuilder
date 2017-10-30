@@ -27,6 +27,11 @@ export default {
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-	font-size: 16px;
+  font-size: 16px;
+  border-bottom: 2px solid transparent;
+}
+.routernav .router-link-exact-active{
+  color: #0FAF54;
+  border-bottom: 2px solid #0FAF54;
 }
 </style>
