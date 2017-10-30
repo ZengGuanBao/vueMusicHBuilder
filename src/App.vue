@@ -27,7 +27,7 @@ export default {
 <style>
 @import "assets/css/common.css";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: poppin,Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

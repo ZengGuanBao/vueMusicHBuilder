@@ -1,9 +1,9 @@
 <template>
 	<div class="newRanking">
 		<p v-for="(song,index) in songlist" @click="playAudio(song)">
-			<span>{{index+1}}</span>
-		    <img v-bind:src="song.albumId" alt="">
-		    <span>{{song.songName}}</span>
+			<span class="num">{{index+1}}</span>
+      <img v-bind:src="song.albumId" alt="">
+      <span class="rankTitle">{{song.songName}}</span>
 		</p>
 	</div>
 </template>
@@ -54,7 +54,20 @@ export default {
 </script>
 
 <style scoped>
+p{
+  margin: 5px 0;
+}
 img{
-  width: 80px;
+  margin-left: 5px;
+  width: 50px;
+}
+.num{
+  display: inline-block;
+    width: 25px;
+    margin-left: 0;
+    text-align: center;
+}
+.rankTitle{
+
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div class="search">
     <div class="mod_search_bar">
-      <i></i>
-      <input class="searchInput" v-model="query" type="search" placeholder="搜索歌曲、歌单、专辑">
-      <i></i>
+      <form class="searchform" method="get" action="#" onsubmit="return false">
+        <i class="fa fa-search fa-lg icon_search"></i>
+        <input class="searchInput" v-model="query" type="search" placeholder="搜索歌曲、歌单、专辑">
+        <i class="fa fa-trash-o fa-lg icon_delete"></i>
+      </form>
     </div>
     <h3 class="result_tit">热门搜索</h3>
     <div class="result_tags">
@@ -59,19 +61,44 @@ export default {
   overflow-y: scroll;
 }
 .mod_search_bar {
+  width: 100%;
   background: #f4f4f4;
   padding: 10px;
   display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-align: center;
+  position: relative;
 }
-.mod_search_bar .searchInput {
+.mod_search_bar .icon_search {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 18px;
   height: 20px;
   line-height: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgba(0, 0, 0, 0.3);
+}
+.mod_search_bar .icon_delete {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 0, 0, 0.3);
+}
+.mod_search_bar .searchform{
   width: 100%;
+}
+.mod_search_bar .searchInput {
+  display: inline-block;
+  margin-left: 20px;
+  height: 20px;
+  line-height: 20px;
+  width: 80%;
   color: rgba(0, 0, 0, 0.3);
   border: none;
-  -webkit-appearance: none;
   font-size: 14px;
 }
 

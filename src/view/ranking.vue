@@ -1,8 +1,8 @@
 <template>
 	<div class="ranking">
-		<div class="">
+		<div class="rankingTab">
 			<router-link to="/ranking/newRanking">新歌榜</router-link>
-    		<router-link to="/ranking/allRanking">总榜</router-link>
+    	<router-link to="/ranking/allRanking">总榜</router-link>
 		</div>
 		<router-view/>
 	</div>
@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .ranking{
+  margin-top: 38px;
 	overflow-y: scroll;
 	padding-bottom: 10px;
 }
@@ -48,6 +49,27 @@ export default {
 .ranking p span{
   padding: 10px 10px;
   font-size: 14px
+}
+.rankingTab{
+  text-align: center;
+  position: fixed;
+  top: 84px;
+  left: 0;
+  width: 100%;
+  height: 38px;
+}
+.rankingTab a{
+  display: inline-block;
+  width: 49%;
+  border-radius: 2px;
+  font-size: 14px;
+  height: 38px;
+  line-height: 38px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  background-color: #999;
 }
 </style>
 
