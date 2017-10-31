@@ -133,7 +133,7 @@ export default {
 <style>
 .yo-scroll {
   position: absolute;
-  top: 23rem;
+  top: 12rem;
   right: 0;
   bottom: 0;
   left: 0;

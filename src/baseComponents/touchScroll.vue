@@ -1,5 +1,5 @@
 <template>
-  <div class="yo-scroll"
+  <div class="touch-scroll"
   :class="{'down':(state===0),'up':(state==1),refresh:(state===2),touch:touching}"
   @touchstart="touchStart($event)"
   @touchmove="touchMove($event)"
@@ -123,7 +123,7 @@ export default {
 </script>
 
 <style>
-.yo-scroll {
+.touch-scroll {
   position: absolute;
   top: 240px;
   right: 0;
@@ -133,12 +133,12 @@ export default {
   -webkit-overflow-scrolling: touch;
   background-color: #3E3E3E
 }
-.yo-scroll .inner {
+.touch-scroll .inner {
   position: absolute;
   width: 100%;
   transition-duration: 300ms;
 }
-.yo-scroll .pull-refresh {
+.touch-scroll .pull-refresh {
   position: relative;
   left: 0;
   top: 0;
@@ -148,24 +148,24 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.yo-scroll.touch .inner {
+.touch-scroll.touch .inner {
   transition-duration: 0ms;
 }
-.yo-scroll.down .down-tip {
+.touch-scroll.down .down-tip {
   display: block;
 }
-.yo-scroll.up .up-tip {
+.touch-scroll.up .up-tip {
   display: block;
 }
-.yo-scroll.refresh .refresh-tip {
+.touch-scroll.refresh .refresh-tip {
   display: block;
 }
-.yo-scroll .down-tip,
-.yo-scroll .refresh-tip,
-.yo-scroll .up-tip {
+.touch-scroll .down-tip,
+.touch-scroll .refresh-tip,
+.touch-scroll .up-tip {
   display: none;
 }
-.yo-scroll .load-more {
+.touch-scroll .load-more {
   color: #fff;
   height: 3rem;
   display: flex;
