@@ -8,18 +8,21 @@
     	<h1 class="title">{{topinfo.ListName}}</h1>
     </div>
     <!--<h3  class="topinfo-title"></h3>-->
-    <ul class="musicList">
-      <li class="music" v-for="(song,index) in musicList"  @click="playAudio(song)">
-        <span>{{index + 1}}</span>
-        <span>{{song.data.songname}}-{{song.data.singer[0].name}}--{{song.data.albumname}}</span>
-      </li>
-    </ul>
+    <touchScroll :on-refresh="onRefresh" :on-infinite="onInfinite">
+      <ul class="musicList">
+        <li class="music" v-for="(song,index) in musicList"  @click="playAudio(song)">
+          <span>{{index + 1}}</span>
+          <span>{{song.data.songname}}-{{song.data.singer[0].name}}--{{song.data.albumname}}</span>
+        </li>
+      </ul>
+    </touchScroll>
   </div>
 </template>
 
 <script>
 import audioJs from '../audio/audio'
 import {getMusicList} from '../../api/rank'
+import touchScroll from '../../baseComponents/touchScroll'
 export default {
   name: 'music-list',
   data () {
@@ -28,6 +31,9 @@ export default {
       musicList: [],
       topid: this.$route.query.id
     }
+  },
+  components: {
+    touchScroll
   },
   mounted: function () {
     this.$nextTick(function () {
@@ -40,6 +46,12 @@ export default {
     })
   },
   methods: {
+    onRefresh: function(done) {
+      done()
+    },
+    onInfinite: function(done) {
+      done()
+    },
   	backHide: function () {
   		this.$refs.musicListDiv.classList.remove('bounceInUp');
   		window.history.go(-1)
@@ -87,9 +99,7 @@ export default {
   color: #E9E9E9;
 }
 .musicList{
-	margin-top: 290px;
   background-color: #3E3E3E;
-  margin-bottom: 100px;
 }
 .music{
     height: 32px;
@@ -103,5 +113,8 @@ export default {
     -moz-transition: 0.2s;
     overflow: hidden;
     color: #E9E9E9
+}
+.back i{
+  margin-top: 12px;
 }
 </style>

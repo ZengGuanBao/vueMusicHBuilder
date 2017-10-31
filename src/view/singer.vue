@@ -9,11 +9,13 @@
         </li>
     </ul>
     <router-view/>
+    <bottom></bottom>
   </div>
 </template>
 
 <script>
 import {getSingerList} from '../api/singer'
+import bottom from '@/components/footer/bottom'
 export default {
   name: 'singer',
   data () {
@@ -21,11 +23,14 @@ export default {
       singers: []
     }
   },
+  components: {
+    bottom
+  },
   mounted: function () {
     this.$nextTick(function () {
-    	$('.singer').css('height', $(window).height()-184)
+    	$('.singer').css('height', $(window).height()-84)
       $(window).resize(function () {  
-				$('.singer').css('height', $(window).height()-184)
+				$('.singer').css('height', $(window).height()-84)
 		  });
       var _this = this
       getSingerList().then((res) => {

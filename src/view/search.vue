@@ -11,12 +11,13 @@
     <div class="result_tags">
       <a class="" v-for="key in hotkey">{{key.k}}</a>
     </div>
-    
+    <bottom></bottom>
   </div>
 </template>
 
 <script>
-import { getHotKey, search } from "../api/search";
+import { getHotKey, search } from "../api/search"
+import bottom from '@/components/footer/bottom'
 export default {
   name: "search",
   data() {
@@ -28,11 +29,14 @@ export default {
       perpage: 20
     };
   },
+  components: {
+    bottom
+  },
   mounted: function() {
     this.$nextTick(function() {
-      $(".search").css("height", $(window).height() - 184);
+      $(".search").css("height", $(window).height() - 84);
       $(window).resize(function() {
-        $(".search").css("height", $(window).height() - 184);
+        $(".search").css("height", $(window).height() - 84);
       });
       var _this = this;
       getHotKey().then(res => {

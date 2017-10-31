@@ -5,11 +5,13 @@
     </div>
   	<a @click="playSongs()">播放歌曲</a>
   	<router-link to="/mvList">mv列表</router-link>
+    <bottom></bottom>
   </div>
 </template>
 
 <script>
 import slider from "../components/silder/slider.vue"
+import bottom from '@/components/footer/bottom'
 export default {
   name: 'index',
   data() {
@@ -43,14 +45,15 @@ export default {
     }
   },
   components: {
-    slider
+    slider,
+    bottom
   },
   mounted: function () {
     this.$nextTick(function () {
       // this.sliderData()
-      $('.index').css('height', $(window).height()-184)
+      $('.index').css('height', $(window).height()-84)
       $(window).resize(function () {  
-				$('.index').css('height', $(window).height()-184)
+				$('.index').css('height', $(window).height()-84)
 		  });
     })
   },

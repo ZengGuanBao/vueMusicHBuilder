@@ -1,15 +1,14 @@
 <template>
 	<div class="newRanking">
-		<p v-for="(song,index) in songlist" @click="playAudio(song)">
-			<span class="num">{{index+1}}</span>
+    <p v-for="(song,index) in songlist" @click="playAudio(song)">
+      <span class="num">{{index+1}}</span>
       <img v-bind:src="song.albumId" alt="">
       <span class="rankTitle">{{song.songName}}</span>
-		</p>
+    </p>
 	</div>
 </template>
 
 <script>
-import $ from 'jquery'
 import audioJs from '../audio/audio'
 export default {
   name: 'newRanking',
@@ -67,7 +66,11 @@ img{
     margin-left: 0;
     text-align: center;
 }
-.rankTitle{
-
+.newRanking{
+  margin-top: 38px;
+}
+.yo-scroll{
+  top: 130px;
+  bottom: 100px
 }
 </style>

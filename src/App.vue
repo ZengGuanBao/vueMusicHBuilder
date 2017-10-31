@@ -4,7 +4,6 @@
     <routernav></routernav>
     <router-view/>
     <audioPlayer></audioPlayer>
-    <bottom></bottom>
   </div>
 </template>
 
@@ -12,14 +11,12 @@
 import top from '@/components/fixedNav/top'
 import routernav from '@/components/fixedNav/routernav'
 import audioPlayer from '@/components/audio/audioPlayer'
-import bottom from '@/components/footer/bottom'
 export default {
   name: 'app',
   components: {
     top,
     routernav,
     audioPlayer,
-    bottom
   }
 }
 </script>

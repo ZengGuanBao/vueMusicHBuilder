@@ -5,17 +5,22 @@
     	<router-link to="/ranking/allRanking">总榜</router-link>
 		</div>
 		<router-view/>
+    <bottom></bottom>
 	</div>
 </template>
 
 <script>
+import bottom from '@/components/footer/bottom'
 export default {
   name: 'ranking',
+  components: {
+    bottom
+  },
   mounted: function () {
     this.$nextTick(function () {
-      $('.ranking').css('height', $(window).height()-184)
+      $('.ranking').css('height', $(window).height()-84)
       $(window).resize(function () {  
-		$('.ranking').css('height', $(window).height()-184)
+		$('.ranking').css('height', $(window).height()-84)
 	  });
     })
   }
@@ -24,7 +29,6 @@ export default {
 
 <style scoped>
 .ranking{
-  margin-top: 38px;
 	overflow-y: scroll;
 	padding-bottom: 10px;
 }

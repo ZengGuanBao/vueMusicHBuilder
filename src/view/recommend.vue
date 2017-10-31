@@ -16,10 +16,12 @@
 	        </li>
 	    </ul>
 	    <router-view/>
+      <bottom></bottom>
 	</div>
 </template>
 <script>
 import {getTopList} from '../api/rank'
+import bottom from '@/components/footer/bottom'
 export default {
   name: 'recommend',
   data () {
@@ -27,11 +29,14 @@ export default {
       topList: []
     }
   },
+  components: {
+    bottom
+  },
   mounted: function () {
     this.$nextTick(function () {
-      $('.recommend').css('height', $(window).height()-184)
+      $('.recommend').css('height', $(window).height()-84)
       $(window).resize(function () {  
-        $('.recommend').css('height', $(window).height()-184)
+        $('.recommend').css('height', $(window).height()-84)
       });
       var _this = this
       getTopList().then((res) => {

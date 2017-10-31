@@ -12,7 +12,11 @@ export default {
 
 <style>
 .footer{
-  
+  display: block;
+  width: 100%;
+  height: 100px;
+  color: #333;
+  text-align: center;
 }
 </style>
 
