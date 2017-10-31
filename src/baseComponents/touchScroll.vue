@@ -125,7 +125,7 @@ export default {
 <style>
 .yo-scroll {
   position: absolute;
-  top: 300px;
+  top: 240px;
   right: 0;
   bottom: 0;
   left: 0;

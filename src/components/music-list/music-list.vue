@@ -53,8 +53,10 @@ export default {
       done()
     },
   	backHide: function () {
-  		this.$refs.musicListDiv.classList.remove('bounceInUp');
-  		window.history.go(-1)
+      this.$refs.musicListDiv.classList.remove('bounceInUp')
+      this.$router.back()
+      // this.$route.back()
+  		// window.history.go(-1)
   	},
     playAudio: function (song) {
       var songInfo = {
@@ -86,7 +88,7 @@ export default {
 }
 .topinfo-img{
   position: fixed;
-  top: 0px;
+  top: -50px;
   left: 0;
   width: 100%;
   z-index: -1;
