@@ -20,28 +20,7 @@ export default {
         index: 2,
         isAuto: true
       },
-      datas: [
-        {
-          href: '',
-          title: '111',
-          img: 'http://www.heibaipig.com/demo/images/test/1.jpg'
-        },
-        {
-          href: '',
-          title: '222',
-          img: 'http://0.thumb.pc6.com/up/2016-5/20165199297.jpg'
-        },
-        {
-          href: '',
-          title: '3333',
-          img: 'http://0.thumb.pc6.com/up/2016-4/201642814841.jpg'
-        },
-        {
-          href: '',
-          title: '4444',
-          img: 'http://m.pc6.com/public/img/20151202.jpg'
-        }
-      ]
+      datas: []
     }
   },
   components: {
