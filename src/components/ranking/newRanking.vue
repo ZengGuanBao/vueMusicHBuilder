@@ -28,7 +28,7 @@ export default {
       $.ajax({
         type: 'get',
         async: false,
-        url: 'http://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js',
+        url: 'https://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js',
         dataType: 'jsonp',
         jsonp: 'callback',
         jsonpCallback: 'JsonCallback',
