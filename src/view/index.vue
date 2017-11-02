@@ -46,7 +46,7 @@ export default {
       },
       datas: [],
       radioList: []
-    };
+    }
   },
   components: {
     slider,
