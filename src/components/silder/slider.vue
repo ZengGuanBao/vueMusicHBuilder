@@ -3,12 +3,12 @@
     <div class="slide-box">
         <ul class="slide-ul" :style="{width: slideWidth + 'px', transform: 'translate3D(' + ulLeft + 'px ,0 ,0)'}">
             <li v-for="(item, index) in datas" :style="{width: windowW + 'px'}">
-              <a :href="item.href" :title="item.title"><img :src="item.img"></a>
+              <a :href="item.linkUrl" :title="item.id"><img :src="item.picUrl"></a>
             </li>
         </ul>
     </div>
     <div class="title-box">
-      <p class="title">{{datas[options.index].title}}</p>
+      <p class="title">{{datas[options.index].id}}</p>
       <span class="circle">
         <em v-for="item in pages" :class="item-1 == options.index ? 'active' : ''"></em>
       </span>
@@ -45,9 +45,6 @@ export default {
     },
     slideWidth: function() {
       // 计算ul宽度
-      $(window).resize(function() {
-        this.windowW * this.datas.length;
-      });
       return this.windowW * this.datas.length;
     },
     pages: function() {

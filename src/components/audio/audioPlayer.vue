@@ -78,8 +78,7 @@ export default {
       isIndex: 0,
       playList: audioJs.playList,
       volumeKeep: 0,
-      search: '',
-      songLyric: {}
+      search: ''
     }
   },
   mounted: function () {
@@ -108,32 +107,32 @@ export default {
         }
         this.$refs.playAudio.src = 'http://ws.stream.qqmusic.qq.com/' + audioJs.playList[this.isIndex].id + '.m4a?fromtag=46'
         this.timeTotal = audioJs.timeFormat(audioJs.playList[this.isIndex].playtime)
-        this.creatLyric(audioJs.playList[this.isIndex].id)
+        // this.creatLyric(audioJs.playList[this.isIndex].id)
         this.$refs.playAudio.play()
       })
     })
   },
   methods: {
-  	creatLyric: function (lyric) {
-      var _this = this
-      $.ajax({
-        type: 'get',
-        async: false,
-        url: 'http://music.qq.com/miniportal/static/lyric/'+ lyric % 100+'/' + lyric + '.xml',
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        jsonpCallback: 'JsonCallback',
-        scriptCharset: 'GB2312',
-        success: function (data) {
-//      	var lyric = parseLyric(lrc);
-//        if(success)success(lyric);
-          _this.songLyric = data
-        },
-        error: function () {
-          alert('fail')
-        }
-      })
-    },
+//   	creatLyric: function (lyric) {
+//       var _this = this
+//       $.ajax({
+//         type: 'get',
+//         async: false,
+//         url: 'http://music.qq.com/miniportal/static/lyric/'+ lyric % 100+'/' + lyric + '.xml',
+//         dataType: 'jsonp',
+//         jsonp: 'callback',
+//         jsonpCallback: 'JsonCallback',
+//         scriptCharset: 'GB2312',
+//         success: function (data) {
+// //      	var lyric = parseLyric(lrc);
+// //        if(success)success(lyric);
+//           _this.songLyric = data
+//         },
+//         error: function () {
+//           alert('fail')
+//         }
+//       })
+//     },
   	upShow: function () {
   		this.$refs.normalPlayer.classList.remove('bounceOutDown');
   		this.$refs.normalPlayer.classList.add('bounceInUp');
@@ -144,7 +143,7 @@ export default {
   	},
     playAudioPlay: function () {
       this.isActive = true
-      this.creatLyric(audioJs.playList[this.isIndex].id)
+      // this.creatLyric(audioJs.playList[this.isIndex].id)
       this.$refs.playAudio.src = 'http://ws.stream.qqmusic.qq.com/' + audioJs.playList[this.isIndex].id + '.m4a?fromtag=46'
       this.$refs.playAudio.play()
       let skPlayerLineLoading = this.$refs.skPlayerLineLoading
