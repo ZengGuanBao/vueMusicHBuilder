@@ -15,10 +15,14 @@
     <h3>mv列表</h3>
     <div class="mvList">
       <ul>
-        <!-- <li v-for="mv in mvList">
-          <img :src="mv.picUrl">
-          <span>{{mv.Ftitle}}</span>
-        </li> -->
+        <li v-for="mvVideo in mvList">
+          <router-link :to="{path: '/mvList/mvPlay', query: {id: mvVideo.vid}}">
+            <img :src="mvVideo.picurl" />
+            <p><span>{{mvVideo.mvtitle}}</span></p>
+            <p><span v-for="singername in mvVideo.singers">{{singername.name}}/</span></p>
+            <p><span>{{(mvVideo.listennum/10000).toFixed(2)}}万</span><span>{{mvVideo.publictime}}</span></p>
+          </router-link>
+        </li>
       </ul>
     </div>
     <div>
@@ -45,7 +49,8 @@ export default {
         isAuto: true
       },
       datas: [],
-      radioList: []
+      radioList: [],
+      mvList: []
     }
   },
   components: {
@@ -59,6 +64,7 @@ export default {
         this.datas = res.data.slider;
         this.radioList = res.data.radioList;
       });
+      this.mvListData()
       $(".index").css("height", $(window).height() - 84);
       $(window).resize(function() {
         $(".index").css("height", $(window).height() - 84);
@@ -66,6 +72,25 @@ export default {
     });
   },
   methods: {
+    mvListData: function () {
+      var _this = this;
+      $.ajax({
+        type: "get",
+        async: false,
+        url:"https://c.y.qq.com/v8/fcg-bin/getmv_by_tag?g_tk=5381&jsonpCallback=getMvlist&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&utf8=1&type=2&year=0&area=0&tag=0&pageno=0&pagecount=2&taglist=1&callback=getMvlist&_=1509610621803",
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "getMvlist",
+        //scriptCharset: 'GBK', //设置编码，否则会乱码
+        success: function(data) {
+          _this.mvList = data.data.mvlist;
+          console.log(data);
+        },
+        error: function() {
+          alert("fail");
+        }
+      });
+    },
     playSongs: function() {
       document.getElementById("audioPlay").style.display = "block";
       document.getElementById("playAudio").play();
@@ -97,10 +122,10 @@ a {
 .index{
   overflow-y: scroll
 }
-.radioList ul {
+.index ul {
   overflow: hidden;
 }
-.radioList li {
+.index li {
   float: left;
   width: 50%;
   -webkit-box-sizing: border-box;
@@ -109,7 +134,7 @@ a {
   overflow: hidden;
   margin: 0;
 }
-.radioList li img {
+.index li img {
   width: 146px;
 }
 </style>
