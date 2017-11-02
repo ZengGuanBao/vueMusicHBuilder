@@ -7,7 +7,7 @@
     <div class="radioList">
       <ul>
         <li v-for="radio in radioList">
-          <img :src="radio.picUrl">
+          <img ref="imgWidth" class="imgWidth" :src="radio.picUrl">
           <span>{{radio.Ftitle}}</span>
         </li>
       </ul>
@@ -26,7 +26,7 @@
       </ul>
     </div>
     <div>
-      <router-link to="/mvList">more</router-link>
+      <router-link class="moreMv" to="/mvList">更多MV</router-link>
     </div>
     <div>
       <a @click="playSongs()">播放歌曲</a>
@@ -46,7 +46,8 @@ export default {
     return {
       optionsInit: {
         index: 2,
-        isAuto: true
+        isAuto: true,
+        scale: 0.4
       },
       datas: [],
       radioList: [],
@@ -60,15 +61,22 @@ export default {
   mounted: function() {
     this.$nextTick(function() {
       getRecommend().then(res => {
-        console.log(res.data);
         this.datas = res.data.slider;
         this.radioList = res.data.radioList;
       });
       this.mvListData()
       $(".index").css("height", $(window).height() - 84);
+      $(".imgWidth").css("width", ($(window).width()-10)/2)
       $(window).resize(function() {
         $(".index").css("height", $(window).height() - 84);
       });
+      console.log($(".imgWidth"))
+      console.log(($(window).width()-10)/2)
+      $(".imgWidth").css("width", ($(window).width()-10)/2)
+      // $(".radioList img").css("width", $(window).width()-10/2 - 5);
+      // $(window).resize(function() {
+      //   $(".index img").css("width", $(window).width()/2 - 5);
+      // });
     });
   },
   methods: {
@@ -81,10 +89,8 @@ export default {
         dataType: "jsonp",
         jsonp: "callback",
         jsonpCallback: "getMvlist",
-        //scriptCharset: 'GBK', //设置编码，否则会乱码
         success: function(data) {
           _this.mvList = data.data.mvlist;
-          console.log(data);
         },
         error: function() {
           alert("fail");
@@ -129,12 +135,25 @@ a {
   float: left;
   width: 50%;
   -webkit-box-sizing: border-box;
-  padding-right: 8px;
+  margin-right: 10px;
   margin-bottom: 10px;
   overflow: hidden;
   margin: 0;
 }
+.index li:last-child{
+  padding-right: 0;
+}
 .index li img {
   width: 146px;
+}
+.moreMv{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  background-color: #42b983;
+  text-align: center;
+  border-radius: 5px;
 }
 </style>

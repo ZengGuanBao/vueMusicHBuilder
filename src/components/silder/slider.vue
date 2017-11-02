@@ -8,7 +8,7 @@
         </ul>
     </div>
     <div class="title-box">
-      <p class="title">{{datas[options.index].id}}</p>
+      <!-- <p class="title">{{datas[options.index].id}}</p> -->
       <span class="circle">
         <em v-for="item in pages" :class="item-1 == options.index ? 'active' : ''"></em>
       </span>
