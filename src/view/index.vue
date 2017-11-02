@@ -7,7 +7,7 @@
     <div class="radioList">
       <ul>
         <li v-for="radio in radioList">
-          <img ref="imgWidth" class="imgWidth" :src="radio.picUrl">
+          <img :style="widthImg" :src="radio.picUrl"> 
           <span>{{radio.Ftitle}}</span>
         </li>
       </ul>
@@ -17,7 +17,7 @@
       <ul>
         <li v-for="mvVideo in mvList">
           <router-link :to="{path: '/mvList/mvPlay', query: {id: mvVideo.vid}}">
-            <img :src="mvVideo.picurl" />
+            <img :style="widthImg" :src="mvVideo.picurl" />
             <p><span>{{mvVideo.mvtitle}}</span></p>
             <p><span v-for="singername in mvVideo.singers">{{singername.name}}/</span></p>
             <p><span>{{(mvVideo.listennum/10000).toFixed(2)}}万</span><span>{{mvVideo.publictime}}</span></p>
@@ -51,7 +51,8 @@ export default {
       },
       datas: [],
       radioList: [],
-      mvList: []
+      mvList: [],
+      widthImg: {}
     }
   },
   components: {
@@ -66,17 +67,19 @@ export default {
       });
       this.mvListData()
       $(".index").css("height", $(window).height() - 84);
-      $(".imgWidth").css("width", ($(window).width()-10)/2)
-      $(window).resize(function() {
-        $(".index").css("height", $(window).height() - 84);
-      });
-      console.log($(".imgWidth"))
+      this.widthImg = {
+        width: $(window).width()*0.48 + "px"
+      }
+      const that = this
+      window.onresize = () => {
+        return (() => {
+          $(".index").css("height", $(window).height() - 84);
+          that.widthImg = {
+            width: $(window).width()*0.48 + "px"
+          }
+        })()
+      }
       console.log(($(window).width()-10)/2)
-      $(".imgWidth").css("width", ($(window).width()-10)/2)
-      // $(".radioList img").css("width", $(window).width()-10/2 - 5);
-      // $(window).resize(function() {
-      //   $(".index img").css("width", $(window).width()/2 - 5);
-      // });
     });
   },
   methods: {
@@ -132,16 +135,15 @@ a {
   overflow: hidden;
 }
 .index li {
+  margin: 0;
   float: left;
-  width: 50%;
+  width: 48%;
   -webkit-box-sizing: border-box;
-  margin-right: 10px;
   margin-bottom: 10px;
   overflow: hidden;
-  margin: 0;
 }
 .index li:last-child{
-  padding-right: 0;
+  float: right;
 }
 .index li img {
   width: 146px;
