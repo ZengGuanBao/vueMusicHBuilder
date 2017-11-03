@@ -39,7 +39,6 @@
 import slider from "../components/silder/slider.vue";
 import bottom from "@/components/footer/bottom";
 import { getRecommend } from "../api/recommend";
-import BScroll from 'better-scroll'
 export default {
   name: "index",
   data() {
@@ -62,7 +61,6 @@ export default {
   mounted: function() {
     this.$nextTick(function() {
       const that = this
-      new BScroll( that.$refs.indexA )
       getRecommend().then(res => {
         this.datas = res.data.slider;
         this.radioList = res.data.radioList;

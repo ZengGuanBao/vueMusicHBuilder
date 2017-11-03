@@ -4,9 +4,9 @@
       <i class="fa fa-arrow-left fa-2x"  @click="mvbackClick"></i>
       <span>{{mvname}}</span>
     </div>
-		<video :src="videoSrc" controls="controls">
-			您的浏览器不支持 video 标签。
-		</video>
+    <customVideo class="customVideo" :videoSrc="videoSrc" :videoImg="videoImg">
+      您的浏览器不支持 video 标签。
+    </customVideo>
 		<div class="mvdetailed">
       <span>{{desc}}</span>
       <span>{{pubdate}}</span>
@@ -16,18 +16,23 @@
 </template>
 
 <script>
+import customVideo from "../customVideo/customVideo";
 export default {
 	name: 'mvPlay',
 	data() {
 		return {
 			vid: this.$route.query.id,
 			videoSrc: '',
+      videoImg: '',
 			mvname: '',
 			desc: '',
 			pubdate: '',
 			listennum: 0
 		}
 	},
+  components: {
+    customVideo
+  },
 	mounted: function() {
 		this.$nextTick(function() {
 			this.mvPlay()
@@ -44,12 +49,9 @@ export default {
 				dataType: "jsonp",
 				jsonp: "callback",
 				jsonpCallback: "tvp_request_getinfo_callback_958739",
-				//scriptCharset: 'GBK', //设置编码，否则会乱码
 				success: function(data) {
 					_this.videoSrc = 'http://117.169.70.150/music.qqvideo.tc.qq.com/AcpQM5yib1MARJ5HCSr5FQAW7NygnyyFyGiujpLJxa5I/' + _this.vid + '.mp4?vkey=' + data.vl.vi[0].fvkey + '&br=122&platform=2&fmt=auto&level=0&sdtfrom=v3010&guid=caba3476fea723d4917764915c8c5950'
-					console.log(data)
-					console.log(_this.videoSrc)
-				},
+        },
 				error: function() {
 					alert('fail');
 				}
@@ -64,14 +66,13 @@ export default {
 				dataType: "jsonp",
 				jsonp: "callback",
 				jsonpCallback: "MusicJsonCallback14644278701460167",
-				//scriptCharset: 'GBK', //设置编码，否则会乱码
 				success: function(data) {
 					_this.mvname = data.data.mvname
 					_this.desc = data.data.desc
 					_this.pubdate = data.data.pubdate
-					_this.listennum = data.data.listennum
+          _this.listennum = data.data.listennum
+          _this.videoImg = data.data.picurl
 					console.log(data)
-					console.log(_this.videoSrc)
 				},
 				error: function() {
 					alert('fail')
@@ -127,9 +128,8 @@ export default {
   font-size: 20px;
   text-align: center;
 }
-video{
+.customVideo{
   margin-top: 40px;
-	width: 100%;
 }
 .mvdetailed{
   height: 400px;
