@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="index" ref="indexA">
     <div id="news">
       <slider v-bind:optionsInit="optionsInit" v-bind:datas="datas"></slider>
     </div>
@@ -31,7 +31,6 @@
     <div>
       <a @click="playSongs()">播放歌曲</a>
     </div>
-  	
     <bottom></bottom>
   </div>
 </template>
@@ -40,6 +39,7 @@
 import slider from "../components/silder/slider.vue";
 import bottom from "@/components/footer/bottom";
 import { getRecommend } from "../api/recommend";
+import BScroll from 'better-scroll'
 export default {
   name: "index",
   data() {
@@ -61,6 +61,8 @@ export default {
   },
   mounted: function() {
     this.$nextTick(function() {
+      const that = this
+      new BScroll( that.$refs.indexA )
       getRecommend().then(res => {
         this.datas = res.data.slider;
         this.radioList = res.data.radioList;
@@ -70,7 +72,7 @@ export default {
       this.widthImg = {
         width: $(window).width()*0.48 + "px"
       }
-      const that = this
+      
       window.onresize = () => {
         return (() => {
           $(".index").css("height", $(window).height() - 84);
@@ -79,7 +81,6 @@ export default {
           }
         })()
       }
-      console.log(($(window).width()-10)/2)
     });
   },
   methods: {

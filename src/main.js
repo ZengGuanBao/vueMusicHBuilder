@@ -8,7 +8,6 @@ import $ from 'jquery'
 import "./assets/css/animate.min.css"
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
