@@ -1,30 +1,41 @@
 <template>
   <div class="playVideo">
-    <video ref="myvideo" class="myvideo" :src="videoSrc" :poster="videoImg" :muted="muteStatus" :autoplay="playStatus">
+    <video ref="myvideo" class="myvideo" :src="videoSrc" :poster="videoImg" :muted="muteStatus" :autoplay="playStatus" @click="playBar()">
       您的浏览器不支持 video 标签。<br />
       your browser does not support the video tag
     </video>
-    <div class="ico-play" :class="{ hide: isPlay }"><i v-on:click="playClick()" class="fa fa-play-circle-o fa-5x"></i></div>
-    <div class="videoControls">
-      <span class="ico-paue"><i class="fa fa-play fa-lg"></i></span>
+    <div class="ico-play" :class="{ hide: isPlay }"><i @click="playPauseClick()" class="fa fa-play-circle-o fa-5x"></i></div>
+    <div class="videoControls animated" :class="isFade ? 'fadeOutDown':'fadeInUp'">
+      <div class="vButton vPlaypause_button" :class="{vPause: isPlay}" @click="playPauseClick()">
+        <button type="button" title="播放/暂停">
+          <span class="vBtn_value">播放</span>
+        </button>  
+      </div>
+      <div class="vBar">
+        <div class="vBar-loading" style="width: 20%;"></div> 
+        <div class="vBar-line" style="width: 6.83%;"></div>
+      </div>
+      <div class="vFullscreen_button">
+        <i class="fa fa-expand fa-lg" @click="fullscreenClick()"></i>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'playVideo',
+  name: "playVideo",
   props: {
     videoSrc: {
       type: String,
-      default: ''
+      default: ""
     },
     videoImg: {
       type: String,
-      default: ''
+      default: ""
     },
     playStatus: {
       type: Boolean,
-      default: false
+      default: true
     },
     muteStatus: {
       type: Boolean,
@@ -37,36 +48,47 @@ export default {
   },
   data() {
     return {
-      isPlay: false
-    }
+      isPlay: true,
+      isFade: true
+    };
   },
   methods: {
-    playClick: function () {
-      this.$refs.myvideo.play()
-      this.isPlay = !this.isPlay
+    playPauseClick: function() {
+      if (this.$refs.myvideo.paused) {
+        this.$refs.myvideo.play();
+      } else {
+        this.$refs.myvideo.pause();
+      }
+      this.isPlay = !this.isPlay;
+    },
+    playBar: function() {
+      this.isFade = !this.isFade;
+    },
+    fullscreenClick: function() {
+      
     }
   }
-}
+};
 </script>
 <style>
-.playVideo{
+.playVideo {
   position: relative;
   width: 100%;
 }
-.myvideo{
+.myvideo {
   width: 100%;
 }
-.hide{
+.hide {
   display: none;
 }
-.ico-play{
+.ico-play {
   position: absolute;
   width: 100%;
   top: 60px;
   text-align: center;
-  color: #31C27C;
+  color: #31c27c;
 }
-.videoControls{
+.videoControls {
   position: absolute;
   display: table;
   z-index: 6;
@@ -74,10 +96,80 @@ export default {
   left: 0;
   width: 100%;
   height: 40px;
-  background-color: rgba(23,23,23,.9);
+  background-color: rgba(23, 23, 23, 0.9);
   -webkit-transform: translateZ(0);
-  -webkit-transition: bottom .3s ease;
-  transition: bottom .3s ease;
+  -webkit-transition: bottom 0.3s ease;
+  transition: bottom 0.3s ease;
+}
+.videoControls button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0 none;
+  background: none;
+  text-align: center;
+  font-size: 0;
+  cursor: pointer;
+}
+.vPlaypause_button {
+  display: table-cell;
+  width: 46px;
+  height: 100%;
+  vertical-align: top;
+}
+.vBar {
+  position: relative;
+  margin-top: 19px;
+  height: 2px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.vBar .vBar-loading {
+  width: 0;
+  height: 100%;
+  cursor: pointer;
+  background-color: #d3d3e0;
+}
+.vBar .vBar-line {
+  width: 0;
+  height: 100%;
+  background-color: #ff9000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+.vBtn_value {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 16px;
+  vertical-align: middle;
+  background: none;
+  border: 15px solid transparent;
+  border-width: 10px 15px;
+  border-left-color: #fff;
+  font-size: 0;
+  color: transparent;
+}
+.vPause .vBtn_value {
+  width: 10px;
+  height: 15px;
+  border: 0 none;
+  margin-left: 0;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+.vFullscreen_button {
+  display: table-cell;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+}
+.vFullscreen_button i {
+  line-height: 30px;
 }
 </style>
 

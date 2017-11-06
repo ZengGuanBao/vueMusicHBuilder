@@ -1,17 +1,17 @@
 <template>
 	<div class="mvPlay">
 	  <div class="mvheader">
-      <i class="fa fa-arrow-left fa-2x"  @click="mvbackClick"></i>
+      <i class="fa fa-chevron-left fa-2x"  @click="mvbackClick"></i>
       <span>{{mvname}}</span>
     </div>
     <customVideo class="customVideo" :videoSrc="videoSrc" :videoImg="videoImg">
       您的浏览器不支持 video 标签。
     </customVideo>
-		<div class="mvdetailed">
+		<!-- <div class="mvdetailed">
       <span>{{desc}}</span>
       <span>{{pubdate}}</span>
       <span>{{(listennum/10000).toFixed(2)}}</span>
-		</div>
+		</div> -->
 	</div>
 </template>
 
