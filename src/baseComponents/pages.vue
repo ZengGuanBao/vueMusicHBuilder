@@ -1,8 +1,8 @@
 <template>
-  <div class="pages">
+  <div class="pages animated fadeInRight" :style="{backgroundImage: 'url(' + bgImg + ')'}">
     <header class="header">
       <h1>{{title}}</h1>
-      <img class="back" :src="backIcon" @click="back" alt="back"/>
+      <i class="back fa fa-chevron-left fa-1x" :src="backIcon" @click="back"></i>
     </header>
     <div class="wrapper">
       <section v-show="desc" class="desc">
@@ -29,6 +29,10 @@ export default {
     content: {
       type: String,
       default: ""
+    },
+    bgImg: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -44,7 +48,7 @@ export default {
 };
 </script>
 <style scoped>
-.page {
+.pages {
   position: fixed;
   z-index: 20;
   top: 0;
@@ -52,32 +56,31 @@ export default {
   width: 100%;
   height: 100%;
   background: #efeff4;
+  background-size:cover;
 }
-.page .header {
+.pages .header {
   position: relative;
   height: 44px;
   line-height: 44px;
   text-align: center;
-  background-color: #f7f7f7;
-  -webkit-box-shadow: 0 1px 6px #ccc;
-  box-shadow: 0 1px 6px #ccc;
+  background-color: rgba(0, 0, 0, 0.2);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   z-index: 99;
 }
-.page .header h1 {
+.pages .header h1 {
   margin: 0;
   font-size: 16px;
-  color: #007bff;
+  color: #fff;
 }
-.page .header .back {
+.pages .header .back {
   position: absolute;
-  top: 9px;
+  top: 15px;
   left: 15px;
   width: 26px;
-  color: #007bff;
+  color: #fff;
 }
-.page .wrapper {
+.pages .wrapper {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -92,18 +95,19 @@ export default {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
-.page .wrapper .desc {
+.pages .wrapper .desc {
   padding: 20px;
   line-height: 20px;
   font-size: 14px;
 }
-.page .wrapper .content {
+.pages .wrapper .content {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   position: relative;
   margin: 0 10px 10px;
+  text-align: center;
 }
 </style>
 

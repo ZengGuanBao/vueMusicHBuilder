@@ -11,9 +11,12 @@
           <span class="vBtn_value">播放</span>
         </button>  
       </div>
-      <div class="vBar">
-        <div class="vBar-loading" style="width: 20%;"></div> 
-        <div class="vBar-line" style="width: 6.83%;"></div>
+      <div class="vBar" ref="vBar" @click="vBarClick()">
+        <div class="vBarloading" style="width: 0;" ref="vBarloading"></div> 
+        <div class="vBarline" style="width: 0;" ref="vBarline"></div>
+      </div>
+      <div class="vTime">
+        <span class="vCurrentTime">{{timeCurr}}</span>/<span class="vDuration">{{timeDur}}</span>
       </div>
       <div class="vFullscreen_button">
         <i class="fa fa-expand fa-lg" @click="fullscreenClick()"></i>
@@ -22,6 +25,7 @@
   </div>
 </template>
 <script>
+import audioJs from '../audio/audio'
 export default {
   name: "playVideo",
   props: {
@@ -44,13 +48,42 @@ export default {
     loop: {
       type: Boolean,
       default: true
+    },
+    preview: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
       isPlay: true,
-      isFade: true
+      isFade: true,
+      timeDur: '00:00',
+      timeCurr: '00:00'
     };
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      let myvideo = this.$refs.myvideo
+      let vBarloading = this.$refs.vBarloading
+      let vBarline = this.$refs.vBarline
+      let that = this
+      
+      this.$refs.myvideo.addEventListener('progress', function () {
+        let percent = myvideo.currentTime / myvideo.duration
+        vBarloading.style.width = (percent * 100).toFixed(2) + '%'
+      });
+      this.$refs.myvideo.addEventListener('timeupdate', function () {
+        let percent = myvideo.currentTime / myvideo.duration
+        vBarline.style.width = (percent * 100).toFixed(2) + '%'
+        that.timeCurr = audioJs.timeFormat(myvideo.currentTime)
+        that.timeDur = audioJs.timeFormat(myvideo.duration)
+      });
+      this.$refs.myvideo.addEventListener('ended', function () {
+        that.isFade = !that.isFade
+        that.isPlay = !that.isPlay
+      });
+    })
   },
   methods: {
     playPauseClick: function() {
@@ -65,7 +98,14 @@ export default {
       this.isFade = !this.isFade;
     },
     fullscreenClick: function() {
-      
+
+    },
+    vBarClick: function (event) {
+      let e = event || window.event
+      let percent = (e.clientX - audioJs.Util.leftDistance(this.$refs.vBar)) / this.$refs.vBar.clientWidth
+      this.$refs.vBarline.style.width = (percent * 100).toFixed(2) + '%'
+      this.$refs.myvideo.currentTime = percent * this.$refs.myvideo.duration
+      e.cancelBubble = true
     }
   }
 };
@@ -125,13 +165,13 @@ export default {
   cursor: pointer;
   background-color: #fff;
 }
-.vBar .vBar-loading {
+.vBar .vBarloading {
   width: 0;
   height: 100%;
   cursor: pointer;
   background-color: #d3d3e0;
 }
-.vBar .vBar-line {
+.vBar .vBarline {
   width: 0;
   height: 100%;
   background-color: #ff9000;
@@ -161,10 +201,21 @@ export default {
   border-left: 2px solid #fff;
   border-right: 2px solid #fff;
 }
+.vTime{
+  display: table-cell;
+  width: 80px;
+  height: 100%;
+  padding: 0 5px;
+  font-size: 12px;
+  line-height: 180%;
+  text-align: center;
+  color: #fff;
+}
 .vFullscreen_button {
   display: table-cell;
   width: 50px;
   height: 100%;
+  line-height: 100%;
   text-align: center;
   color: #fff;
 }

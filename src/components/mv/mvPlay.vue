@@ -4,9 +4,7 @@
       <i class="fa fa-chevron-left fa-2x"  @click="mvbackClick"></i>
       <span>{{mvname}}</span>
     </div>
-    <customVideo class="customVideo" :videoSrc="videoSrc" :videoImg="videoImg">
-      您的浏览器不支持 video 标签。
-    </customVideo>
+    <customVideo class="customVideo" :videoSrc="videoSrc" :videoImg="videoImg" :preview="preview"></customVideo>
 		<!-- <div class="mvdetailed">
       <span>{{desc}}</span>
       <span>{{pubdate}}</span>
@@ -27,7 +25,8 @@ export default {
 			mvname: '',
 			desc: '',
 			pubdate: '',
-			listennum: 0
+      listennum: 0,
+      preview: 0
 		}
 	},
   components: {
@@ -50,7 +49,10 @@ export default {
 				jsonp: "callback",
 				jsonpCallback: "tvp_request_getinfo_callback_958739",
 				success: function(data) {
+          console.log(data)
+          console.log(data.preview)
 					_this.videoSrc = 'http://117.169.70.150/music.qqvideo.tc.qq.com/AcpQM5yib1MARJ5HCSr5FQAW7NygnyyFyGiujpLJxa5I/' + _this.vid + '.mp4?vkey=' + data.vl.vi[0].fvkey + '&br=122&platform=2&fmt=auto&level=0&sdtfrom=v3010&guid=caba3476fea723d4917764915c8c5950'
+          _this.preview = data.preview
         },
 				error: function() {
 					alert('fail');

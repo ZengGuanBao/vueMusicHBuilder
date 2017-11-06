@@ -119,7 +119,7 @@ export default {
             _this.tagTag = data.data.taglist.tag;
             _this.tagYear = data.data.taglist.year;
           }
-          console.log(data);
+          // console.log(data);
           if (done != undefined) {
             done();
           }

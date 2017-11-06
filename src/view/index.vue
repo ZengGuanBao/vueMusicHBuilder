@@ -29,7 +29,8 @@
       <router-link class="moreMv" to="/mvList">更多MV</router-link>
     </div>
     <div>
-      <a @click="playSongs()">播放歌曲</a>
+      <a @click="playSongs()">播放歌曲</a><br />
+      <router-link to="/cusA">自定义组件</router-link>
     </div>
     <bottom></bottom>
   </div>
@@ -70,7 +71,6 @@ export default {
       this.widthImg = {
         width: $(window).width()*0.48 + "px"
       }
-      
       window.onresize = () => {
         return (() => {
           $(".index").css("height", $(window).height() - 84);
