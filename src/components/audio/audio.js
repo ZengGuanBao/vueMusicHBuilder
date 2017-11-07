@@ -2,7 +2,7 @@ const Util = {
   leftDistance: (el) => {
     let left = el.offsetLeft
     let scrollLeft
-    while(el.offsetParent) {
+    while (el.offsetParent) {
       el = el.offsetParent
       left += el.offsetLeft
     }
@@ -10,7 +10,7 @@ const Util = {
     return left - scrollLeft
   },
   percentFormat: (percent) => {
-    return(percent * 100).toFixed(2) + '%'
+    return (percent * 100).toFixed(2) + '%'
   }
 }
 
@@ -24,20 +24,20 @@ function timeFormat(time) {
 
 let playList = []
 // function initializationPlayList ( playList ) {
-  if(window.localStorage.getItem('playList') === null) {
-    playList = [{
-      albumId: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000000jE4g74VS43p.jpg?max_age=2592000',
-      albumName: '身边的故事',
-      id: '108963136',
-      playtime: '328',
-      singerId: '12770',
-      singerName: '赵雷',
-      songName: '成都',
-      type: 3
-    }]
-  } else {
-    playList = JSON.parse(window.localStorage.getItem('playList'))
-  }
+if (window.localStorage.getItem('playList') === null) {
+  playList = [{
+    albumId: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000000jE4g74VS43p.jpg?max_age=2592000',
+    albumName: '身边的故事',
+    id: '108963136',
+    playtime: '328',
+    singerId: '12770',
+    singerName: '赵雷',
+    songName: '成都',
+    type: 3
+  }]
+} else {
+  playList = JSON.parse(window.localStorage.getItem('playList'))
+}
 // }
 // initializationPlayList(playList)
 

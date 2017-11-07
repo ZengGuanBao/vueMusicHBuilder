@@ -31,9 +31,11 @@ export default {
 }
 .circleIcon{
   color: #F5CD19;
+  line-height: 44px;
 }
 .musicIcon{
-  color: #2DB573
+  color: #2DB573;
+  line-height: 42px;
 }
 .top .title{
   display: inline-block;
