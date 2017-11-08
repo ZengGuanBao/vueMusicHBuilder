@@ -34,6 +34,14 @@ if (window.localStorage.getItem('playList') === null) {
     singerName: '赵雷',
     songName: '成都',
     type: 3
+    // imgID: "1666157",
+    // imgName: "无法长大",
+    // songId: "108963136",
+    // songDuration: "328",
+    // songName: "成都",
+    // singerId: "12770",
+    // singerName: "赵雷",
+    // songType: 0
   }]
 } else {
   playList = JSON.parse(window.localStorage.getItem('playList'))

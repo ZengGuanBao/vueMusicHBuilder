@@ -328,7 +328,7 @@ body {
 }
 
 #skPlayer .skPlayer-control .skPlayer-time {
-	font-size: 15px;
+	font-size: 13px;
 	color: #666;
 	float: left;
 }
@@ -488,7 +488,7 @@ body {
 	-webkit-transition: 0.2s;
 	-moz-transition: 0.2s;
 	overflow: hidden;
-	background-color: #FFF;
+	background-color: #d94240;
 	border-bottom: 1px solid #D94240;
 }
 

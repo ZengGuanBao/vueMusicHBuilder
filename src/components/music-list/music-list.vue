@@ -10,7 +10,7 @@
     <!--<h3  class="topinfo-title"></h3>-->
     <touchScroll :on-refresh="onRefresh" :on-infinite="onInfinite">
       <ul class="musicList">
-        <li class="music" v-for="(song,index) in musicList"  @click="playAudio(song)">
+        <li class="music" v-for="(song,index) in musicList"  @click="addPlayList({song})">
           <span>{{index + 1}}</span>
           <span>{{song.data.songname}}-{{song.data.singer[0].name}}--{{song.data.albumname}}</span>
         </li>
@@ -23,6 +23,7 @@
 import audioJs from '../audio/audio'
 import {getMusicList} from '../../api/rank'
 import touchScroll from '../../baseComponents/touchScroll'
+import { mapActions } from "Vuex"; 
 export default {
   name: 'music-list',
   data () {
@@ -46,6 +47,9 @@ export default {
     })
   },
   methods: {
+    ...mapActions({  
+      addPlayList: 'addPlayList'  
+    }),
     onRefresh: function(done) {
       done()
     },
