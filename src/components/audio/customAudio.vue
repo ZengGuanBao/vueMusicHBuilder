@@ -137,6 +137,7 @@ export default {
       setIsIndexSelect: 'setIsIndexSelect',
       setIsPlay: 'setIsPlay',
       setIsPlayTrue: 'setIsPlayTrue',
+      setIsPlayFalse: 'setIsPlayFalse',
       setPlayVolume: 'setPlayVolume'
     }),
     playPauseClick: function() {
