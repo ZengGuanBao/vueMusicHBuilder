@@ -6,6 +6,7 @@ export default {
     if (JSON.stringify(state.playList).indexOf(JSON.stringify(song)) === -1) {
       state.playList.push(song)
       window.localStorage.setItem('playList', JSON.stringify(state.playList))
+      state.isIndex = state.playList.length - 1
     }
   },
   setPlaying (state) {
@@ -20,9 +21,6 @@ export default {
     } else {
       state.isIndex += 1
     }
-  },
-  setIsIndexPlay (state) {
-    state.isIndex = state.playList.length - 1
   },
   setIsIndexSelect (state, num) {
     state.isIndex = num

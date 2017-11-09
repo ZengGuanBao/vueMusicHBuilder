@@ -4,7 +4,6 @@ export const setPlayList = ({ commit }) => {
 
 export const addPlayList = ({ commit }, song) => {
   commit('addPlayList', song)
-  commit('setIsIndexPlay')
 }
 export const setIsIndex = ({ commit }) => {
   commit('setIsIndex')
@@ -12,7 +11,6 @@ export const setIsIndex = ({ commit }) => {
 export const setIsIndexSelect = ({ commit }, {num}) => {
   commit('setIsIndexSelect',num)
 }
-
 export const setPlaying = ({ commit }) => {
   commit('setPlaying') 
 }

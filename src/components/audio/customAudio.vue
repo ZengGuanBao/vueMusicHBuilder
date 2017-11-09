@@ -12,7 +12,7 @@
             <div>歌手名：<span>{{playList[isIndex].songName}}</span></div>
           </div>
           <div class="audioLyric">
-            歌词
+            歌词api暂时没有解决，暂无！！！
           </div>
           <div class="audioControls">
             <div class="aButton aPlaypause_button" :class="{aPause: isPlay}" @click="playPauseClick()">
@@ -45,7 +45,7 @@
         <p class="skPlayer-author">{{playList[isIndex].singerName}}</p>
         <div class="skPlayer-percent"  ref="timePercent" @click="aSkBarClick()">
           <div class="skPlayer-line-loading" ref="skPlayerLineLoading"></div>
-          <div class="skPlayer-line" ref="timeLine"></div>
+          <div class="skPlayer-line" ref="timeLine" style="width: 100%;"></div>
         </div>
         <div>
           <p class="skPlayer-time">
@@ -89,7 +89,7 @@ export default {
     ...mapState({  
       playList: state => state.playList,
       isIndex: state => state.isIndex,
-      isPlay: state => state.isPlay
+      isPlay: state => state.isPlay,
     })  
   },
   data() {
@@ -100,9 +100,7 @@ export default {
       timeDur: "00:00",
       timeCurr: "00:00",
       isVoice: false,
-      isList: false,
-      volumeKeep: 0,
-      search: ''
+      isList: false
     };
   },
   components: {
@@ -138,7 +136,8 @@ export default {
       setIsIndex: 'setIsIndex',
       setIsIndexSelect: 'setIsIndexSelect',
       setIsPlay: 'setIsPlay',
-      setIsPlayTrue: 'setIsPlayTrue'
+      setIsPlayTrue: 'setIsPlayTrue',
+      setPlayVolume: 'setPlayVolume'
     }),
     playPauseClick: function() {
       if (this.$refs.myaudio.paused) {
@@ -186,7 +185,26 @@ export default {
     },
     upShow: function () {
   		this.isFade = true
-  	},
+    },
+    clickVoice: function () {
+      this.isVoice = !this.isVoice
+      let e = event || window.event
+      if (this.$refs.myaudio.volume === 0) {
+        this.$refs.volumeLine.style.width = '100%'
+        this.$refs.myaudio.volume = 1
+      } else {
+        this.$refs.volumeLine.style.width = 0
+        this.$refs.myaudio.volume = 0
+      }
+      e.cancelBubble = true
+    },
+    volumeClickPercent: function (event) {
+      let e = event || window.event
+      let percent = (e.clientX - fun.leftDistance(this.$refs.volumePercent)) / this.$refs.volumePercent.clientWidth
+      this.$refs.volumeLine.style.width = fun.percentFormat(percent)
+      this.$refs.myaudio.volume = percent
+      e.cancelBubble = true
+    }
   }
 };
 </script>
