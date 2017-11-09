@@ -3,19 +3,38 @@ export default {
     state.playList = list
   },
   addPlayList (state, song) {
-    for (var index = 0; index < state.playList.length; index++) {
-      if( index in state.playList && state.playList[index] === song ) {
-        console.log(song)
-      } 
+    if (JSON.stringify(state.playList).indexOf(JSON.stringify(song)) === -1) {
+      state.playList.push(song)
+      state.playSong = song
+      window.localStorage.setItem('playList', JSON.stringify(state.playList))
     }
-    state.playList.push(song)
-    state.playSong = song
-    window.localStorage.setItem('playList', JSON.stringify(state.playList))
   },
   setPlaying (state) {
     state.playing = !state.playing
   },
   setPlayVolume (state, num) {
     state.playVolume = num
+  },
+  setIsIndex (state) {
+    if (state.isIndex === state.playList.length - 1) {
+      state.isIndex = 0
+    } else {
+      state.isIndex += 1
+    }
+  },
+  setIsIndexPlay (state) {
+    state.isIndex = state.playList.length - 1
+  },
+  setIsIndexSelect (state, num) {
+    state.isIndex = num
+  },
+  setIsPlay (state) {
+    state.isPlay = !state.isPlay;
+  },
+  setIsPlayTrue (state) {
+    state.isPlay = true
+  },
+  setIsPlayFalse (state) {
+    state.isPlay = false
   }
 }

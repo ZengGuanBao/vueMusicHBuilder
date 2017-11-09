@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import audioJs from '../audio/audio'
 import {getMusicList} from '../../api/rank'
 import touchScroll from '../../baseComponents/touchScroll'
 import { mapActions } from "Vuex"; 
@@ -59,23 +58,7 @@ export default {
   	backHide: function () {
       this.$refs.musicListDiv.classList.remove('bounceInUp')
       this.$router.back()
-      // this.$route.back()
-  		// window.history.go(-1)
-  	},
-    playAudio: function (song) {
-      var songInfo = {
-        albumId: 'http://imgcache.qq.com/music/photo/album_300/' + parseInt(song.data.albumid) % 100 + '/300_albumpic_' + song.data.albumid + '_0.jpg',
-        albumName: song.data.albumname,
-        id: song.data.songid,
-        playtime: song.data.interval,
-        singerId: song.data.singer[0].id,
-        singerName: song.data.singer[0].name,
-        songName: song.data.songname,
-        type: song.data.type
-      }
-      audioJs.playList.push(songInfo)
-      window.localStorage.setItem('playList', JSON.stringify(audioJs.playList))
-    }
+  	}
   }
 }
 </script>

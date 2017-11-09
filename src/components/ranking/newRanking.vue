@@ -1,6 +1,6 @@
 <template>
 	<div class="newRanking">
-    <p v-for="(song,index) in songlist" @click="playAudio(song)">
+    <p v-for="(song,index) in songlist" @click="addPlayList(song)">
       <span class="num">{{index+1}}</span>
       <img v-bind:src="song.albumId" alt="">
       <span class="rankTitle">{{song.songName}}</span>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import audioJs from '../audio/audio'
+import { mapActions } from "Vuex"; 
 export default {
   name: 'newRanking',
   data () {
@@ -23,6 +23,9 @@ export default {
     })
   },
   methods: {
+    ...mapActions({  
+      addPlayList: 'addPlayList'  
+    }),
     cartView: function () {
       var _this = this
       $.ajax({
@@ -43,10 +46,6 @@ export default {
           alert('fail')
         }
       })
-    },
-    playAudio: function (song) {
-      audioJs.playList.push(song)
-      window.localStorage.setItem('playList', JSON.stringify(audioJs.playList))
     }
   }
 }

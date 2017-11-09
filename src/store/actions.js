@@ -3,7 +3,6 @@ export const setPlayList = ({ commit }) => {
 }
 
 export const addPlayList = ({ commit }, {song} ) => {
-  console.log(song)
   let songInfo = {
     imgID: song.data.albumid,
     imgName: song.data.albumname,
@@ -14,8 +13,15 @@ export const addPlayList = ({ commit }, {song} ) => {
     singerName: song.data.singer[0].name,
     songType: song.data.type
   }
-  console.log(songInfo)
   commit('addPlayList', songInfo)
+  commit('setIsIndexPlay')
+}
+export const setIsIndex = ({ commit }) => {
+  commit('setIsIndex')
+}
+export const setIsIndexSelect = ({ commit }, {num}) => {
+  commit('setIsIndexSelect',num)
+  
 }
 
 export const setPlaying = ({ commit }) => {
@@ -26,3 +32,13 @@ export const setPlayVolume = ({ commit } , num) => {
   commit('setPlayVolume' , num) 
 }
 
+// 播放按钮(判断是否处于播放)
+export const setIsPlay = ({commit}) => {
+  commit('setIsPlay')
+}
+export const setIsPlayTrue = ({commit}) => {
+  commit('setIsPlayTrue')
+}
+export const setIsPlayFalse = ({commit}) => {
+  commit('setIsPlayFalse')
+}

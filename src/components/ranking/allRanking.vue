@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import audioJs from '../audio/audio'
+import { mapActions } from "Vuex"
 export default {
   name: 'allRanking',
   data () {
@@ -23,6 +23,9 @@ export default {
     })
   },
   methods: {
+    ...mapActions({  
+      addPlayList: 'addPlayList'  
+    }),
     cartView: function () {
       var _this = this
       $.ajax({
@@ -43,20 +46,6 @@ export default {
           alert('fail')
         }
       })
-    },
-    playAudio: function (song) {
-      audioJs.playList.push(song)
-      window.localStorage.setItem('playList', JSON.stringify(audioJs.playList))
-      // for (song in timeFormat.playList) {
-      //   if (timeFormat.playList.hasOwnProperty(song) === false) {
-      //     timeFormat.playList.push(song)
-      //     window.localStorage.setItem('playList', JSON.stringify(timeFormat.playList))
-      //   }
-      // }
-      // var audio = document.getElementById('playAudio')
-      // var playIndex = audioJs.playList.length - 1
-      // audio.src = audioJs.playList[playIndex].id
-      // audio.play()
     }
   }
 }

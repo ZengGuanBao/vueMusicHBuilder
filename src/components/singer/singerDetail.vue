@@ -9,7 +9,7 @@
     </div>
     <!--<h3  class="topinfo-title"></h3>-->
     <ul class="musicList">
-      <li class="music" v-for="(song,index) in musicList"  @click="playAudio(song)">
+      <li class="music" v-for="(song,index) in musicList"  @click="addPlayList(song)">
         <span>{{index + 1}}</span>
         <span>{{song.musicData.songname}}-{{song.musicData.singer[0].name}}--{{song.musicData.albumname}}</span>
       </li>
@@ -19,6 +19,7 @@
 
 <script>
 import {getSingerDetail} from '../../api/singer'
+import { mapActions } from "Vuex"; 
 export default {
   data() {
     return {
@@ -38,24 +39,13 @@ export default {
     })
   },
   methods: {
+    ...mapActions({  
+      addPlayList: 'addPlayList'  
+    }),
   	backHide: function () {
   		this.$refs.musicListDiv.classList.remove('bounceInUp');
   		window.history.go(-1)
-  	},
-    playAudio: function (song) {
-      var songInfo = {
-        albumId: 'http://imgcache.qq.com/music/photo/album_300/' + parseInt(song.data.albumid) % 100 + '/300_albumpic_' + song.data.albumid + '_0.jpg',
-        albumName: song.data.albumname,
-        id: song.data.songid,
-        playtime: song.data.interval,
-        singerId: song.data.singer[0].id,
-        singerName: song.data.singer[0].name,
-        songName: song.data.songname,
-        type: song.data.type
-      }
-      audioJs.playList.push(songInfo)
-      window.localStorage.setItem('playList', JSON.stringify(audioJs.playList))
-    }
+  	}
   }
 }
 </script>

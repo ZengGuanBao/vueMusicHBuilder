@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import audioJs from '../audio/audio'
+import fun from "../../assets/js/common"
 export default {
   name: "playVideo",
   props: {
@@ -76,8 +76,8 @@ export default {
       this.$refs.myvideo.addEventListener('timeupdate', function () {
         let percent = myvideo.currentTime / myvideo.duration
         vBarline.style.width = (percent * 100).toFixed(2) + '%'
-        that.timeCurr = audioJs.timeFormat(myvideo.currentTime)
-        that.timeDur = audioJs.timeFormat(myvideo.duration)
+        that.timeCurr = fun.timeFormat(myvideo.currentTime)
+        that.timeDur = fun.timeFormat(myvideo.duration)
       });
       this.$refs.myvideo.addEventListener('ended', function () {
         that.isFade = !that.isFade
@@ -102,7 +102,7 @@ export default {
     },
     vBarClick: function (event) {
       let e = event || window.event
-      let percent = (e.clientX - audioJs.Util.leftDistance(this.$refs.vBar)) / this.$refs.vBar.clientWidth
+      let percent = (e.clientX - fun.leftDistance(this.$refs.vBar)) / this.$refs.vBar.clientWidth
       this.$refs.vBarline.style.width = (percent * 100).toFixed(2) + '%'
       this.$refs.myvideo.currentTime = percent * this.$refs.myvideo.duration
       e.cancelBubble = true
