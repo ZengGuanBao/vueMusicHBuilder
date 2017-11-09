@@ -5,7 +5,6 @@ export default {
   addPlayList (state, song) {
     if (JSON.stringify(state.playList).indexOf(JSON.stringify(song)) === -1) {
       state.playList.push(song)
-      state.playSong = song
       window.localStorage.setItem('playList', JSON.stringify(state.playList))
     }
   },

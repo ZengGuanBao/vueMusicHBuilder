@@ -3,20 +3,20 @@
     <top></top>
     <routernav></routernav>
     <router-view/>
-    <audioPlayer></audioPlayer>
+    <customAudio></customAudio>
   </div>
 </template>
 
 <script>
 import top from '@/components/fixedNav/top'
 import routernav from '@/components/fixedNav/routernav'
-import audioPlayer from '@/components/audio/audioPlayer'
+import customAudio from '@/components/audio/customAudio'
 export default {
   name: 'app',
   components: {
     top,
     routernav,
-    audioPlayer,
+    customAudio,
   }
 }
 </script>

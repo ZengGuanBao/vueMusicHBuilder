@@ -28,10 +28,6 @@
     <div>
       <router-link class="moreMv" to="/mvList">更多MV</router-link>
     </div>
-    <div>
-      <a @click="playSongs()">播放歌曲</a><br />
-      <router-link to="/cusA">自定义组件</router-link>
-    </div>
     <bottom></bottom>
   </div>
 </template>
@@ -98,10 +94,6 @@ export default {
           alert("fail");
         }
       });
-    },
-    playSongs: function() {
-      document.getElementById("audioPlay").style.display = "block";
-      document.getElementById("playAudio").play();
     }
   }
 };

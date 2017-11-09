@@ -11,7 +11,6 @@ import musicList from '@/components/music-list/music-list'
 import mvList from '@/components/mv/mvList'
 import mvPlay from '@/components/mv/mvPlay'
 import singerDetail from '@/components/singer/singerDetail'
-import cusA from '@/components/audio/customAudio'
 
 Vue.use(Router)
 
@@ -72,11 +71,6 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
-    },
-    {
-      path: '/cusA',
-      name: 'cusA',
-      component: cusA
     }
   ]
 })
