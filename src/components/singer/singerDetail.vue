@@ -9,7 +9,7 @@
     </div>
     <!--<h3  class="topinfo-title"></h3>-->
     <ul class="musicList">
-      <li class="music" v-for="(song,index) in musicList"  @click="addPlayList(song)">
+      <li class="music" v-for="(song,index) in musicList"  @click="resetSong(song)">
         <span>{{index + 1}}</span>
         <span>{{song.musicData.songname}}-{{song.musicData.singer[0].name}}--{{song.musicData.albumname}}</span>
       </li>
@@ -40,12 +40,25 @@ export default {
   },
   methods: {
     ...mapActions({  
-      addPlayList: 'addPlayList'  
+      addPlayList: 'addPlayList'
     }),
   	backHide: function () {
   		this.$refs.musicListDiv.classList.remove('bounceInUp');
   		window.history.go(-1)
-  	}
+    },
+    resetSong: function (rSong) {
+      let songInfo = {
+        imgID: rSong.musicData.albumid,
+        imgName: rSong.musicData.albumname,
+        songId: rSong.musicData.songid,
+        songDuration: rSong.musicData.interval,
+        songName: rSong.musicData.songname,
+        singerId: rSong.musicData.singer[0].id,
+        singerName: rSong.musicData.singer[0].name,
+        songType: rSong.musicData.type
+      }
+      this.addPlayList(songInfo)
+    }
   }
 }
 </script>

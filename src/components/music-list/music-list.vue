@@ -10,7 +10,7 @@
     <!--<h3  class="topinfo-title"></h3>-->
     <touchScroll :on-refresh="onRefresh" :on-infinite="onInfinite">
       <ul class="musicList">
-        <li class="music" v-for="(song,index) in musicList"  @click="addPlayList({song})">
+        <li class="music" v-for="(song,index) in musicList"  @click="resetSong(song)">
           <span>{{index + 1}}</span>
           <span>{{song.data.songname}}-{{song.data.singer[0].name}}--{{song.data.albumname}}</span>
         </li>
@@ -58,7 +58,20 @@ export default {
   	backHide: function () {
       this.$refs.musicListDiv.classList.remove('bounceInUp')
       this.$router.back()
-  	}
+  	},
+    resetSong: function (rSong) {
+      let songInfo = {
+        imgID: rSong.data.albumid,
+        imgName: rSong.data.albumname,
+        songId: rSong.data.songid,
+        songDuration: rSong.data.interval,
+        songName: rSong.data.songname,
+        singerId: rSong.data.singer[0].id,
+        singerName: rSong.data.singer[0].name,
+        songType: rSong.data.type
+      }
+      this.addPlayList(songInfo)
+    }
   }
 }
 </script>

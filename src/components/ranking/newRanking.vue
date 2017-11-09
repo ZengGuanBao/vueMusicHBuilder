@@ -1,8 +1,8 @@
 <template>
 	<div class="newRanking">
-    <p v-for="(song,index) in songlist" @click="addPlayList(song)">
+    <p v-for="(song,index) in songlist" @click="resetSong(song)">
       <span class="num">{{index+1}}</span>
-      <img v-bind:src="song.albumId" alt="">
+      <img v-bind:src="'http://imgcache.qq.com/music/photo/album_300/' + song.albumId % 100 + '/300_albumpic_' + song.albumId + '_0.jpg'" alt="">
       <span class="rankTitle">{{song.songName}}</span>
     </p>
 	</div>
@@ -26,6 +26,19 @@ export default {
     ...mapActions({  
       addPlayList: 'addPlayList'  
     }),
+    resetSong: function (rSong) {
+      let songInfo = {
+        imgID: rSong.albumId,
+        imgName: rSong.albumName,
+        songId: rSong.id,
+        songDuration: rSong.playtime,
+        songName: rSong.songName,
+        singerId: rSong.singerId,
+        singerName: rSong.singerName,
+        songType: rSong.type
+      }
+      this.addPlayList(songInfo)
+    },
     cartView: function () {
       var _this = this
       $.ajax({
@@ -38,9 +51,6 @@ export default {
         scriptCharset: 'GBK',
         success: function (data) {
           _this.songlist = data.songlist
-          for (var i = 0; i < _this.songlist.length; i++) {
-            _this.songlist[i].albumId = 'http://imgcache.qq.com/music/photo/album_300/' + _this.songlist[i].albumId % 100 + '/300_albumpic_' + _this.songlist[i].albumId + '_0.jpg'
-          }
         },
         error: function () {
           alert('fail')
