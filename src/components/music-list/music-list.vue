@@ -1,27 +1,22 @@
 <template>
-  <div class="music-list animated bounceInUp" ref="musicListDiv">
-    <img class="topinfo-img" v-bind:src="topinfo.pic_v12" alt="">
-    <div class="bankOff">
-    	<div class="back" @click="backHide()">
-    		<i class="fa fa-chevron-left fa-2x"></i>
-    	</div>
-    	<h1 class="title">{{topinfo.ListName}}</h1>
+  <listLabel class="listLabel" :onRefresh="onRefresh" :onInfinite="onInfinite" :title="topinfo.ListName" :back="back">
+    <div slot="topInfo">
+      <img class="topinfo-img" :src="topinfo.pic_v12" alt="">
     </div>
-    <!--<h3  class="topinfo-title"></h3>-->
-    <touchScroll :on-refresh="onRefresh" :on-infinite="onInfinite">
+    <div slot="listContent">
       <ul class="musicList">
-        <li class="music" v-for="(song,index) in musicList"  @click="resetSong(song)">
+        <li class="music" v-for="(song,index) in musicList" :key="index" @click="resetSong(song)">
           <span>{{index + 1}}</span>
           <span>{{song.data.songname}}-{{song.data.singer[0].name}}--{{song.data.albumname}}</span>
         </li>
       </ul>
-    </touchScroll>
-  </div>
+    </div>
+  </listLabel>
 </template>
 
 <script>
 import {getMusicList} from '../../api/rank'
-import touchScroll from '../../baseComponents/touchScroll'
+import listLabel from "../../baseComponents/list"
 import { mapActions } from "Vuex"; 
 export default {
   name: 'music-list',
@@ -29,17 +24,17 @@ export default {
     return {
       topinfo: {},
       musicList: [],
-      topid: this.$route.query.id
+      topid: this.$route.query.id,
+      isDirection: false
     }
   },
   components: {
-    touchScroll
+    listLabel
   },
   mounted: function () {
     this.$nextTick(function () {
       var _this = this
       getMusicList(this.topid).then((res) => {
-      	console.log(res.songlist)
         _this.topinfo = res.topinfo
         _this.musicList = res.songlist
       })
@@ -55,8 +50,7 @@ export default {
     onInfinite: function(done) {
       done()
     },
-  	backHide: function () {
-      this.$refs.musicListDiv.classList.remove('bounceInUp')
+  	back: function () {
       this.$router.back()
   	},
     resetSong: function (rSong) {
@@ -77,6 +71,10 @@ export default {
 </script>
 
 <style>
+.listLabel{
+  background: url(../../assets/img/bg.png);
+  z-index: 19;
+}
 .music-list{
 	position: fixed;
   top: 0;
@@ -87,11 +85,8 @@ export default {
   overflow-y: scroll;
 }
 .topinfo-img{
-  position: fixed;
-  top: -50px;
-  left: 0;
+  
   width: 100%;
-  z-index: -1;
 }
 .topinfo-title{
   margin-top: 290px;

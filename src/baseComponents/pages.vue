@@ -1,8 +1,8 @@
 <template>
-  <div class="pages animated fadeInUp" :class="isFade ? 'fadeInUp':'fadeOutDownBig'" :style="{backgroundImage: 'url(' + bgImg + ')'}">
+  <div class="pages">
     <header class="header">
       <h1>{{title}}</h1>
-      <i class="back fa fa-chevron-down fa-1x" @click="back"></i>
+      <i class="back fa fa-2x" :class=" isDirection ? 'fa-chevron-down' : 'fa-chevron-left' " @click="back"></i>
     </header>
     <div class="wrapper">
       <section v-show="desc" class="desc">
@@ -30,31 +30,25 @@ export default {
       type: String,
       default: ""
     },
-    bgImg: {
-      type: String,
-      default: ''
-    },
-    isFade: {
-      type: Boolean,
-      default: false
-    },
     back: {
       type: Function,
       default: undefined,
       required: false
     },
+    isDirection: {
+      type: Boolean,
+      default: true
+    }
   }
 };
 </script>
 <style scoped>
 .pages {
   position: fixed;
-  z-index: 20;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #efeff4;
   background-size:cover;
 }
 .pages .header {
@@ -74,7 +68,7 @@ export default {
 }
 .pages .header .back {
   position: absolute;
-  top: 15px;
+  top: 9px;
   left: 15px;
   width: 26px;
   color: #fff;

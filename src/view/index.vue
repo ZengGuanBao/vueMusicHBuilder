@@ -3,23 +3,33 @@
     <div id="news">
       <slider v-bind:optionsInit="optionsInit" v-bind:datas="datas"></slider>
     </div>
-    <h3>电台</h3>
+    <h3 class="list_title">电台</h3>
     <div class="radioList">
       <ul>
-        <li v-for="radio in radioList">
+        <li v-for="(radio,index) in radioList" :key="index">
           <img :style="widthImg" :src="radio.picUrl"> 
           <span>{{radio.Ftitle}}</span>
         </li>
       </ul>
     </div>
-    <h3>mv列表</h3>
+    <h3 class="list_title">热门歌单</h3>
+    <div class="songList">
+      <ul>
+        <li v-for="(song,index) in songList" :key="index">
+          <img :style="widthImg" :src="song.picUrl"> 
+          <span>{{song.songListDesc}}</span>
+          <span>{{song.songListAuthor}}</span>
+        </li>
+      </ul>
+    </div>
+    <h3 class="list_title">mv列表</h3>
     <div class="mvList">
       <ul>
-        <li v-for="mvVideo in mvList">
+        <li v-for="(mvVideo,index) in mvList" :key="index">
           <router-link :to="{path: '/mvList/mvPlay', query: {id: mvVideo.vid}}">
             <img :style="widthImg" :src="mvVideo.picurl" />
             <p><span>{{mvVideo.mvtitle}}</span></p>
-            <p><span v-for="singername in mvVideo.singers">{{singername.name}}/</span></p>
+            <p><span v-for="(singername,index) in mvVideo.singers" :key="index">{{singername.name}}/</span></p>
             <p><span>{{(mvVideo.listennum/10000).toFixed(2)}}万</span><span>{{mvVideo.publictime}}</span></p>
           </router-link>
         </li>
@@ -47,6 +57,7 @@ export default {
       },
       datas: [],
       radioList: [],
+      songList: [],
       mvList: [],
       widthImg: {}
     }
@@ -61,6 +72,7 @@ export default {
       getRecommend().then(res => {
         this.datas = res.data.slider;
         this.radioList = res.data.radioList;
+        this.songList = res.data.songList
       });
       this.mvListData()
       $(".index").css("height", $(window).height() - 84);
@@ -122,10 +134,16 @@ a {
 .index{
   overflow-y: scroll
 }
+.list_title {
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 11px;
+  font-weight: normal;
+}
 .index ul {
   overflow: hidden;
 }
-.index li {
+.index ul li {
   margin: 0;
   float: left;
   width: 48%;
@@ -133,8 +151,17 @@ a {
   margin-bottom: 10px;
   overflow: hidden;
 }
-.index li:last-child{
+.index ul li:nth-of-type(2n){
   float: right;
+}
+.index ul li span{
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .index li img {
   width: 146px;

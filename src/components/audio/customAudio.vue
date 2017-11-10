@@ -1,7 +1,7 @@
 <template>
   <div class="playAudio">
     <!-- 全屏播放 -->
-    <pages class="pagesAudio" :title="playList[isIndex].songName" :bgImg="bgImg" :isFade="isFade" :back="back">
+    <pages class="pagesAudio animated" :title="playList[isIndex].songName" :class="isFade ? 'fadeInUp':'fadeOutDownBig'" :back="back">
       <div slot="content">
         <div>
           <div class="audioInfo">
@@ -64,10 +64,10 @@
         </div>
         <!-- <i class="skPlayer-mode" @click="switchMode()" v-bind:class="{'skPlayer-mode-loop': playStatus }"></i> -->
       </div>
-      <div class="skPlayer-list-outDiv">
+      <div class="skPlayer-list-outDiv animated bounceInUp">
         <p>播放列表<i class="skPlayer-list-sign"></i></p>
         <ul class="skPlayer-list">
-          <li v-bind:class="{'skPlayer-curMusic': isIndex === index }" v-for="(play,index) in playList" @click="clickPlayList(index)">
+          <li v-for='(play,index) in playList' :key="index" :class="{'skPlayer-curMusic': isIndex === index }" @click="clickPlayList(index)">
             <i class="skPlayer-list-sign"></i>
             <span class="skPlayer-list-index">{{parseInt(index) + 1}}</span>
             <span class="skPlayer-list-name" title="Dream">{{play.songName}}</span>
@@ -94,7 +94,6 @@ export default {
   },
   data() {
     return {
-      bgImg: "/vueMusicHBuilder/static/img/bg.e0a99c4.png",
       playStatus: true,
       isFade: true,
       timeDur: "00:00",
@@ -209,9 +208,10 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 @import "../../assets/css/common.css";
 .pagesAudio{
+  background: url(../../assets/img/bg.png);
   z-index: 20
 }
 #skPlayer{

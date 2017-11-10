@@ -1,13 +1,13 @@
 <template>
 	<div class="recommend" ref="recommend">
 	    <ul>
-	        <li class="item" v-for="item in topList">
+	        <li class="item" v-for="(item,index) in topList"  :key="index">
 	          <router-link :to="{path: '/recommend/musicList', query: {id: item.id}}">
 	            <div class="icon">
 	                <img width="100" height="100" v-bind:src="item.picUrl" />
 	            </div>
 	            <ul class="songlist">
-	                <li class="song" v-for="(song,index) in item.songList">
+	                <li class="song" v-for="(song,index) in item.songList" :key="index">
 	                    <span>{{index + 1}}</span>
 	                    <span>{{song.songname}}-{{song.singername}}</span>
 	                </li>

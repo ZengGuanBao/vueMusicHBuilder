@@ -125,7 +125,7 @@ export default {
 <style>
 .touch-scroll {
   position: absolute;
-  top: 240px;
+  top: 180px;
   right: 0;
   bottom: 0;
   left: 0;
