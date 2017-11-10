@@ -131,7 +131,6 @@ export default {
   left: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  background-color: #3E3E3E
 }
 .touch-scroll .inner {
   position: absolute;

@@ -1,52 +1,57 @@
 <template>
-  <div class="music-list animated bounceInUp" ref="musicListDiv">
-    <img class="topinfo-img" v-bind:src="albumlist.pic" alt="">
-    <div class="bankOff">
-    	<div class="back" @click="backHide()">
-    		<i class="fa fa-chevron-left fa-2x"></i>
-    	</div>
-    	<h1 class="title">{{albumlist.name}}</h1>
-    </div>
-    <!--<h3  class="topinfo-title"></h3>-->
-    <ul class="musicList">
-      <li class="music" v-for="(song,index) in musicList"  @click="resetSong(song)">
+<listLabel class="listLabel" :onRefresh="onRefresh" :onInfinite="onInfinite" :title="albumlist.name" :back="back">
+  <div slot="topInfo">
+    <img class="topinfo-img" :src="albumlist.pic" alt="">
+  </div>
+  <div slot="listContent">
+    <ul>
+      <li class="music" v-for="(song,index) in musicList" :key="index" @click="resetSong(song)">
         <span>{{index + 1}}</span>
         <span>{{song.musicData.songname}}-{{song.musicData.singer[0].name}}--{{song.musicData.albumname}}</span>
       </li>
     </ul>
   </div>
+</listLabel>
 </template>
 
 <script>
-import {getSingerDetail} from '../../api/singer'
-import { mapActions } from "Vuex"; 
+import { getSingerDetail } from "../../api/singer";
+import listLabel from "../../baseComponents/list";
+import { mapActions } from "Vuex";
 export default {
   data() {
     return {
       albumlist: [],
       musicList: [],
       topid: this.$route.query.id
-    }
+    };
   },
-  mounted: function () {
-    this.$nextTick(function () {
-      var _this = this
-      getSingerDetail(this.topid).then((res) => {
-        console.log(res)
-        _this.albumlist = res.data.albumlist[0]
-        _this.musicList = res.data.list
-      })
-    })
+  mounted: function() {
+    this.$nextTick(function() {
+      var _this = this;
+      getSingerDetail(this.topid).then(res => {
+        _this.albumlist = res.data.albumlist[0];
+        _this.musicList = res.data.list;
+      });
+    });
+  },
+  components: {
+    listLabel
   },
   methods: {
-    ...mapActions({  
-      addPlayList: 'addPlayList'
+    ...mapActions({
+      addPlayList: "addPlayList"
     }),
-  	backHide: function () {
-  		this.$refs.musicListDiv.classList.remove('bounceInUp');
-  		window.history.go(-1)
+    onRefresh: function(done) {
+      done();
     },
-    resetSong: function (rSong) {
+    onInfinite: function(done) {
+      done();
+    },
+    back: function() {
+      this.$router.back();
+    },
+    resetSong: function(rSong) {
       let songInfo = {
         imgID: rSong.musicData.albumid,
         imgName: rSong.musicData.albumname,
@@ -56,53 +61,30 @@ export default {
         singerId: rSong.musicData.singer[0].id,
         singerName: rSong.musicData.singer[0].name,
         songType: rSong.musicData.type
-      }
-      this.addPlayList(songInfo)
+      };
+      this.addPlayList(songInfo);
     }
   }
-}
+};
 </script>
 
-<style>
-.music-list{
-	position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  overflow-y: scroll;
+<style scoped>
+.topinfo-img {
+  float: left;
+  width: 40%;
+  margin: 10px 0;
 }
-.topinfo-img{
-  position: fixed;
-  top: 0px;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-}
-.topinfo-title{
-  margin-top: 290px;
-  height: 40px;
-  line-height: 40px;
-  background-color: #3E3E3E;
-  color: #E9E9E9;
-}
-.musicList{
-	margin-top: 290px;
-  background-color: #3E3E3E;
-  margin-bottom: 100px;
-}
-.music{
-    height: 32px;
-    line-height: 32px;
-    padding: 0 15px;
-    font-size: 12px;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.2s;
-    -webkit-transition: 0.2s;
-    -moz-transition: 0.2s;
-    overflow: hidden;
-    color: #E9E9E9
+.music {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 15px;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  overflow: hidden;
+  color: #e9e9e9;
 }
 </style>

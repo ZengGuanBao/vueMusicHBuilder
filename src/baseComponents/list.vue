@@ -1,6 +1,6 @@
   
 <template>
-  <pages class="animated fadeInRight" :title="title" :back="back" :isDirection="isDirection">
+  <pages class="listLabel animated fadeInRight" :title="title" :back="back" :isDirection="isDirection">
     <div slot="content">
       <slot name="topInfo"></slot>
       <touchScroll :on-refresh="onRefresh" :on-infinite="onInfinite">
@@ -46,7 +46,10 @@ export default {
 }
 </script>
 <style>
-
+.listLabel{
+  background: url(../assets/img/bg.png);
+  z-index: 19;
+}
 </style>
 
 
