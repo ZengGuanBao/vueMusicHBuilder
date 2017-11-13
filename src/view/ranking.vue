@@ -1,19 +1,28 @@
 <template>
 	<div class="ranking">
 		<div class="rankingTab">
-			<router-link to="/ranking/newRanking">新歌榜</router-link>
-    	<router-link to="/ranking/allRanking">总榜</router-link>
+      <h2 class="index-list-anchor">新歌榜</h2>
+      <div>
+        <newRanking></newRanking>
+      </div>
+      <h2 class="index-list-anchor">总榜</h2>
+      <div>
+        <allRanking></allRanking>
+      </div>
 		</div>
-		<router-view/>
     <bottom></bottom>
 	</div>
 </template>
 
 <script>
 import bottom from "@/components/footer/bottom";
+import newRanking from "../components/ranking/newRanking";
+import allRanking from "../components/ranking/allRanking";
 export default {
   name: "ranking",
   components: {
+    newRanking,
+    allRanking,
     bottom
   },
   mounted: function() {
@@ -53,27 +62,6 @@ export default {
 .ranking p span {
   padding: 10px 10px;
   font-size: 14px;
-}
-.rankingTab {
-  text-align: center;
-  position: fixed;
-  top: 84px;
-  left: 0;
-  width: 100%;
-  height: 38px;
-}
-.rankingTab a {
-  display: inline-block;
-  width: 49%;
-  border-radius: 2px;
-  font-size: 14px;
-  height: 38px;
-  line-height: 38px;
-  white-space: nowrap;
-  box-sizing: border-box;
-  overflow: hidden;
-  text-align: center;
-  background-color: #999;
 }
 </style>
 

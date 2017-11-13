@@ -43,7 +43,6 @@ export default {
       var _this = this
       $.ajax({
         type: 'get',
-        async: false,
         url: 'https://music.qq.com/musicbox/shop/v3/data/hit/hit_newsong.js',
         dataType: 'jsonp',
         jsonp: 'callback',
@@ -74,9 +73,6 @@ img{
     width: 25px;
     margin-left: 0;
     text-align: center;
-}
-.newRanking{
-  margin-top: 38px;
 }
 .yo-scroll{
   top: 130px;

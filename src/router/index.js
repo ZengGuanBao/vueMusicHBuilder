@@ -5,8 +5,6 @@ import recommend from '@/view/recommend'
 import ranking from '@/view/ranking'
 import singer from '@/view/singer'
 import search from '@/view/search'
-import newRanking from '@/components/ranking/newRanking'
-import allRanking from '@/components/ranking/allRanking'
 import musicList from '@/components/music-list/music-list'
 import mvList from '@/components/mv/mvList'
 import mvPlay from '@/components/mv/mvPlay'
@@ -43,18 +41,7 @@ export default new Router({
     {
       path: '/ranking',
       name: 'ranking',
-      component: ranking,
-      children: [{
-          path: '/ranking/newRanking',
-          name: 'newRanking',
-          component: newRanking
-        },
-        {
-          path: '/ranking/allRanking',
-          name: 'allRanking',
-          component: allRanking
-        }
-      ]
+      component: ranking
     },
     {
       path: '/singer',

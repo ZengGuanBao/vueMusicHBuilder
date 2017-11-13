@@ -198,7 +198,7 @@ export default {
     position: relative;
     height: 50px;
     line-height: 50px;
-    padding: 0 16px;
+    padding: 0 1px;
     font-size: 14px;
     color: #333;
 }
